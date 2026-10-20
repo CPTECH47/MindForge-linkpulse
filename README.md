@@ -147,7 +147,6 @@ The administrator blocklist is **not a malware scanner**. Validation rejects uns
 - [Architecture and contracts](docs/ARCHITECTURE.md)
 - [Deployment, operations and tests](docs/OPERATIONS.md)
 - [Five-developer ownership and demo script](docs/TEAM_GUIDE.md)
-- [Per-member commit and push instructions](docs/CONTRIBUTIONS.md)
 - [Environment example](.env.example)
 
 No public deployment is created by this repository. Production needs hosting, PostgreSQL, an HTTPS domain, secrets, a running worker, backups and scheduled cleanup. Shared workspace invitations, per-user custom domains, public API, password-reset email delivery and external threat scanning are future enhancements.

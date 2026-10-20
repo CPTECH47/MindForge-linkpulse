@@ -30,10 +30,6 @@ Own imports, QR/bio flows, Docker/CI, demo seeding, documentation and integratio
 
 Demonstrate one valid CSV row, one invalid scheme and a duplicate alias; confirm ready rows, inspect results, download PNG and open the public bio page. Show country-database readiness and the installer, plus administrator business-record editing and platform policy settings.
 
-## Commit ownership
-
-Follow [the contribution handoff](CONTRIBUTIONS.md) and the exact file assignment in `team-scopes.json`. Each branch contains only its member's assigned files and is pushed using that member's authenticated GitHub account. An authorized operator can also use the documented same-Mac token workflow.
-
 ## Five-minute demo
 
 1. **0:00–0:45:** Introduce the workspace and central link record. Use a fresh workspace or clearly identify synthetic seeded data.
