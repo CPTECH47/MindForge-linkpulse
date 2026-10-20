@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: linkpulse
+      POSTGRES_USER: linkpulse
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U linkpulse -d linkpulse"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  web:
+    build: .
+    env_file: .env
+    volumes:
+      - geoip_data:/app/data
+    environment: &app_environment
+      DATABASE_URL: ${DATABASE_URL:-postgresql://linkpulse:${POSTGRES_PASSWORD}@db:5432/linkpulse}
+    command: ["sh", "-c", "python manage.py migrate --noinput && python manage.py collectstatic --noinput && exec gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 2 --threads 2 --timeout 30 --access-logfile - --error-logfile -"]
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+  worker:
+    build: .
+    env_file: .env
+    volumes:
+      - geoip_data:/app/data:ro
+    environment: *app_environment
+    command: ["python", "manage.py", "process_clicks", "--loop"]
+    depends_on:
+      web:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  postgres_data:
+  geoip_data:
