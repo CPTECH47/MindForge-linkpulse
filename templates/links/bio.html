@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}{{ bio.title }} · LinkPulse{% endblock %}
+{% block content %}<section class="bio-card"><div class="bio-avatar">{{ bio.title|first|upper }}</div><h1>{{ bio.title }}</h1><p class="muted">{{ bio.description }}</p><div class="bio-links">{% for link in bio_links %}<a href="{% url 'redirect_link' link.alias %}?src=bio">{{ link.title }} <span>↗</span></a>{% empty %}<p>No links to share just yet. Check back soon.</p>{% endfor %}</div><a class="bio-credit" href="{% url 'login' %}">Made with LinkPulse ↗</a></section>{% endblock %}

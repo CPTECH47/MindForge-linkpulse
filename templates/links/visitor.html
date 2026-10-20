@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}{{ heading }} · LinkPulse{% endblock %}
+{% block content %}<section class="visitor-card"><a class="brand" href="{% url 'login' %}"><span class="brand-mark">↗</span> LinkPulse.</a><div class="visitor-symbol">{% if form %}⌑{% else %}↗{% endif %}</div><h1>{{ heading }}</h1><p class="muted">{{ reason }}</p>{% if form %}<form method="post" action="{% url 'unlock_link' link.alias %}">{% csrf_token %}{{ form.as_p }}<input type="hidden" name="source" value="{% firstof request.GET.src request.POST.source "" %}"><button class="button full">Continue to link →</button></form>{% endif %}</section>{% endblock %}

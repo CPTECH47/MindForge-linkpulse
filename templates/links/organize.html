@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">A LITTLE ORGANIZATION GOES A LONG WAY</p><h1>Bring your links together.</h1><p class="muted">Manage campaigns, folders and tags without losing link history.</p></div><a class="button secondary" href="?archived={% if request.GET.archived == '1' %}0{% else %}1{% endif %}">{% if request.GET.archived == '1' %}Hide{% else %}Include{% endif %} archived groups</a></div>
+<div class="form-layout"><div>
+{% for section in groups %}<section class="panel"><h2>{{ section.label }}s</h2><div class="table-scroll"><table><thead><tr><th>Name</th><th>Links</th><th>Lifetime redirects</th><th>Manage & report</th></tr></thead><tbody>{% for item in section.items %}<tr><td>{{ item.name }}{% if item.archived %} <span class="badge">Archived</span>{% endif %}<small>{{ item.description }}</small></td><td>{{ item.link_count }}</td><td>{{ item.clicks|default:0 }}</td><td><a href="{% url 'group_edit' section.kind item.pk %}">Edit & performance →</a></td></tr>{% empty %}<tr><td colspan="4" class="empty">No groups in this selection.</td></tr>{% endfor %}</tbody></table></div></section>{% endfor %}
+</div><section class="panel"><h2>Create a group</h2><form method="post">{% csrf_token %}{{ form.as_p }}<button class="button">Create →</button></form><p class="footnote">Archived groups remain in historical reports and on existing links. They cannot be assigned to new links. Unused groups can be deleted from their detail page.</p></section></div>
+{% endblock %}

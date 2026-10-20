@@ -1,0 +1,209 @@
+{
+  "repository": "https://github.com/CPTECH47/MindForge-linkpulse.git",
+  "base": "c50f0d0d8f6451fd228ab4b9d893f159e09f7cb5",
+  "timezone": "Asia/Kolkata",
+  "owners": [
+    {
+      "key": "tejas",
+      "name": "Tejas Pant",
+      "username": "tejaspant09",
+      "email": "tejaspant14@gmail.com",
+      "branch": "feature/tejas/link-ui",
+      "commits": [
+        {
+          "message": "feat: build workspace pages and responsive navigation",
+          "date": "2026-10-19T13:00:00+05:30",
+          "files": [
+            "static/css/app.css",
+            "templates/base.html",
+            "templates/404.html",
+            "templates/500.html",
+            "templates/registration/login.html",
+            "templates/registration/signup.html",
+            "templates/links/list.html",
+            "templates/links/detail.html",
+            "templates/links/organize.html",
+            "templates/links/group.html"
+          ]
+        },
+        {
+          "message": "feat: add two-step link creation and publish validation",
+          "date": "2026-10-20T13:15:00+05:30",
+          "files": [
+            "static/js/app.js",
+            "templates/links/form.html"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "charchit",
+      "name": "Charchit Pant",
+      "username": "CPTECH47",
+      "email": "CHARCHITPANT.25101440590@gehu.ac.in",
+      "branch": "feature/charchit/auth-crud",
+      "commits": [
+        {
+          "message": "feat: add link models and isolated workspaces",
+          "date": "2026-10-19T09:15:00+05:30",
+          "files": [
+            "links/__init__.py",
+            "links/apps.py",
+            "links/models.py",
+            "links/context_processors.py",
+            "links/migrations/0001_initial.py",
+            "links/migrations/0002_platformsettings_campaign_archived_folder_archived_and_more.py",
+            "links/migrations/0003_platformsettings_single_platform_policy_and_more.py",
+            "links/migrations/__init__.py"
+          ]
+        },
+        {
+          "message": "feat: add login and owner-isolated link management",
+          "date": "2026-10-20T09:30:00+05:30",
+          "files": [
+            "links/forms/management.py",
+            "links/views/accounts.py",
+            "links/views/management.py",
+            "links/views/common.py",
+            "links/admin/management.py",
+            "links/services/links.py",
+            "links/services/organization.py"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "pulkit",
+      "name": "Pulkit Joshi",
+      "username": "pulkitjoshi987",
+      "email": "pulkitjoshi987@gmail.com",
+      "branch": "feature/pulkit/redirects",
+      "commits": [
+        {
+          "message": "feat: enforce atomic redirect rules and click caps",
+          "date": "2026-10-19T10:30:00+05:30",
+          "files": [
+            "links/services/redirects.py",
+            "links/validators.py",
+            "links/services/rate_limits.py",
+            "links/middleware.py"
+          ]
+        },
+        {
+          "message": "feat: add password gates and link access protection",
+          "date": "2026-10-20T10:45:00+05:30",
+          "files": [
+            "links/forms/redirects.py",
+            "links/views/redirects.py",
+            "links/admin/moderation.py",
+            "links/services/policy.py",
+            "templates/links/visitor.html"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "jaanvi",
+      "name": "Jaanvi Kandpal",
+      "username": "jaanvikandpal170-jpg",
+      "email": "jaanvikandpal170@gmail.com",
+      "branch": "feature/jaanvi/analytics",
+      "commits": [
+        {
+          "message": "feat: capture click events and process enrichment retries",
+          "date": "2026-10-19T11:45:00+05:30",
+          "files": [
+            "links/services/tracking.py",
+            "links/services/worker.py",
+            "links/management/commands/process_clicks.py",
+            "links/management/commands/retry_clicks.py",
+            "links/management/commands/cleanup_data.py"
+          ]
+        },
+        {
+          "message": "feat: add stored-event analytics and live dashboard charts",
+          "date": "2026-10-20T12:00:00+05:30",
+          "files": [
+            "links/services/analytics.py",
+            "links/views/analytics.py",
+            "links/admin/analytics.py",
+            "static/js/analytics.js",
+            "templates/links/dashboard.html",
+            "templates/links/metrics.html",
+            "templates/links/platform.html"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "mansi",
+      "name": "Mansi Nagarkoti",
+      "username": "mansinagarkoti",
+      "email": "nagarkotimansi085@gmail.com",
+      "branch": "feature/mansi/qr-csv-deploy",
+      "commits": [
+        {
+          "message": "feat: add QR sharing and validated CSV import workflows",
+          "date": "2026-10-19T14:15:00+05:30",
+          "files": [
+            "links/services/imports.py",
+            "links/forms/sharing.py",
+            "links/views/sharing.py",
+            "links/admin/sharing.py",
+            "templates/links/import.html",
+            "templates/links/import_batch.html",
+            "templates/links/bio.html",
+            "templates/links/settings.html"
+          ]
+        },
+        {
+          "message": "chore: add deployment, integration tests and team handoff",
+          "date": "2026-10-20T14:30:00+05:30",
+          "files": [
+            ".dockerignore",
+            ".env.example",
+            ".github/workflows/test.yml",
+            ".gitignore",
+            "Dockerfile",
+            "README.md",
+            "compose.yaml",
+            "config/__init__.py",
+            "config/settings.py",
+            "config/urls.py",
+            "config/wsgi.py",
+            "docs/ARCHITECTURE.md",
+            "docs/CONTRIBUTIONS.md",
+            "docs/OPERATIONS.md",
+            "docs/TEAM_GUIDE.md",
+            "docs/screenshots/dashboard.png",
+            "docs/screenshots/link-details.png",
+            "docs/screenshots/tag-performance.png",
+            "docs/team-scopes.json",
+            "links/admin/__init__.py",
+            "links/forms/__init__.py",
+            "links/management/__init__.py",
+            "links/management/commands/__init__.py",
+            "links/management/commands/install_geoip.py",
+            "links/management/commands/seed_demo.py",
+            "links/services/__init__.py",
+            "links/tests/__init__.py",
+            "links/tests/test_concurrency.py",
+            "links/tests/test_platform.py",
+            "links/tests/test_scope.py",
+            "links/urls.py",
+            "links/views/__init__.py",
+            "manage.py",
+            "pyproject.toml",
+            "requirements-dev.txt",
+            "requirements.lock",
+            "requirements.txt",
+            "tools/build_team_handoff.py",
+            "tools/push_team.py",
+            "tools/team_commit.py",
+            "tools/tests/test_team_commit.py"
+          ]
+        }
+      ]
+    }
+  ]
+}
