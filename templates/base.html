@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>{% block title %}LinkPulse{% endblock %}</title><link rel="stylesheet" href="{% static 'css/app.css' %}"><script src="{% static 'js/app.js' %}" defer></script>{% block scripts %}{% endblock %}</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+{% if user.is_authenticated %}
+<aside class="sidebar">
+  <a class="brand" href="{% url 'dashboard' %}"><span class="brand-mark">↗</span> LinkPulse<span class="brand-dot">.</span></a>
+  <div class="workspace-label">YOUR WORKSPACE</div>
+  <form action="{% url 'switch_workspace' %}" method="post" class="workspace-switch">{% csrf_token %}<label class="sr-only" for="workspace-select">Workspace</label><select id="workspace-select" name="workspace" data-autosubmit>{% for item in workspaces %}<option value="{{ item.pk }}" {% if workspace.pk == item.pk %}selected{% endif %}>{{ item.name }}</option>{% endfor %}</select><button class="sr-only" type="submit">Switch</button></form>
+  <nav aria-label="Main navigation">
+    <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}aria-current="page"{% endif %}><span>▦</span> Overview</a>
+    <a href="{% url 'link_list' %}" {% if 'link' in request.resolver_match.url_name %}aria-current="page"{% endif %}><span>↗</span> My links</a>
+    <a href="{% url 'organize' %}" {% if request.resolver_match.url_name == 'organize' %}aria-current="page"{% endif %}><span>◫</span> Campaigns & tags</a>
+    <a href="{% url 'import_csv' %}" {% if 'import' in request.resolver_match.url_name %}aria-current="page"{% endif %}><span>⇧</span> Bulk import</a>
+    <a href="{% url 'settings' %}" {% if request.resolver_match.url_name == 'settings' %}aria-current="page"{% endif %}><span>⚙</span> Settings & bio</a>
+    {% if user.is_staff %}<a href="{% url 'platform_analytics' %}"><span>◇</span> Platform health</a><a href="{% url 'admin:index' %}"><span>⊞</span> Administration</a>{% endif %}
+  </nav>
+  <div class="sidebar-bottom"><div class="avatar">{{ user.username|first|upper }}</div><div><strong>{{ user.username }}</strong><small>Personal account</small></div><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="icon-button" title="Sign out" aria-label="Sign out">↪</button></form></div>
+</aside>
+{% endif %}
+<div class="{% if user.is_authenticated %}shell{% else %}public-shell{% endif %}">
+{% if user.is_authenticated %}<header class="topbar"><span>Workspace <span class="muted">/</span> <strong>{{ workspace.name }}</strong></span><span class="topbar-note"><span class="status-dot"></span> Make every link count</span></header>{% endif %}
+<main id="main">
+{% if messages %}<div aria-live="polite">{% for message in messages %}<div class="notice {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}
+</main>
+<footer class="footer">LinkPulse <span>Thoughtful links. Measurable impact.</span> <a href="https://db-ip.com" rel="noopener">IP Geolocation by DB-IP</a></footer>
+</div>
+</body></html>

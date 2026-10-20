@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}Create account · LinkPulse{% endblock %}
+{% block content %}<section class="auth-card standalone"><a class="brand" href="{% url 'login' %}"><span class="brand-mark">↗</span> LinkPulse.</a><p class="eyebrow">LET’S MAKE CONNECTIONS</p><h1>Create your workspace</h1><p class="muted">A better home for every link you share.</p><form method="post">{% csrf_token %}{{ form.as_p }}<button class="button full">Create account →</button></form><p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p></section>{% endblock %}

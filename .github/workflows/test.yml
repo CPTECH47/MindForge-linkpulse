@@ -1,0 +1,44 @@
+name: LinkPulse verification
+on:
+  push:
+    branches: [main, feature/mansi/team-integration]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: linkpulse
+          POSTGRES_PASSWORD: test-only
+          POSTGRES_DB: linkpulse
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U linkpulse -d linkpulse"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://linkpulse:test-only@127.0.0.1:5432/linkpulse
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - run: python -m pip install -r requirements.lock
+      - run: python manage.py check
+      - run: python manage.py makemigrations --check --dry-run
+      - run: python manage.py test --noinput
+      - run: python manage.py collectstatic --noinput
+      - name: Check production security configuration
+        env:
+          DEBUG: 'false'
+          SECRET_KEY: ci-security-check-only-key-longer-than-fifty-characters-and-not-for-real-use
+          PUBLIC_BASE_URL: https://links.example.org
+          ALLOWED_HOSTS: links.example.org
+          CSRF_TRUSTED_ORIGINS: https://links.example.org
+        run: python manage.py check --deploy --fail-level WARNING
