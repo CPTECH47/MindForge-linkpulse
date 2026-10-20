@@ -14,7 +14,9 @@ LinkPulse brings creation, sharing, redirect rules, organization and analytics i
 
 ## Live demo
 
-**Public live link: pending deployment.** A hosted URL will be added here after deployment is verified. The local development address below is not a public submission link.
+**Public live link:** [Open LinkPulse](https://web-production-ec5b2.up.railway.app/).
+
+Hosted on Railway. Sign up or sign in to access your workspace. The public login and signup pages, database health endpoint, and their static assets have been verified over HTTPS.
 
 Local preview: [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
@@ -148,4 +150,4 @@ The administrator blocklist is **not a malware scanner**. Validation rejects uns
 - [Deployment, operations and tests](docs/OPERATIONS.md)
 - [Environment example](.env.example)
 
-No public deployment is created by this repository. Production needs hosting, PostgreSQL, an HTTPS domain, secrets, a running worker, backups and scheduled cleanup. Shared workspace invitations, per-user custom domains, public API, password-reset email delivery and external threat scanning are future enhancements.
+The live application is hosted on Railway. Production operation requires PostgreSQL, HTTPS, secrets, a running worker, backups and scheduled cleanup. Shared workspace invitations, per-user custom domains, public API, password-reset email delivery and external threat scanning are future enhancements.
